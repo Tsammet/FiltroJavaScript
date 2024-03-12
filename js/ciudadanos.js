@@ -3,7 +3,7 @@ const listaCiudadanos = [];
 const loadCiudadanos = async () => {
 
     try {
-        listaCiudadanos.length = 0;
+        // listaCiudadanos.length = 0;
         const respuesta = await fetch('http://localhost:3000/ciudadanos');
 
         if (!respuesta.ok) {

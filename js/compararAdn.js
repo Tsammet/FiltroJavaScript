@@ -27,34 +27,34 @@ const compararAdnCulpable = () => {
 
     const adnSospechosoSplit = adnSospechoso.split("")
 
-    let newCount = 0
-    let maxCount = 0
-    let maxSospechoso = ''
+    let resultados = [];
 
     for (let ciudadano of listaCiudadanos){
-        newCount = 0
-        const adnCiudadano1 = ciudadano.codigo_adn.split("")
+        let newCount = 0;
+        const adnCiudadano1 = ciudadano.codigo_adn.split("");
 
-        for ( i = 0; i < 20; i++){
+        for (let i = 0; i < 20; i++){
 
             if(adnCiudadano1[i] === adnSospechosoSplit[i]){
-
-                newCount += 5
-
-                if(newCount > maxCount){
-                    maxCount = newCount;
-                    maxSospechoso = ciudadano.nombre_completo
-                }
+                newCount += 5;
             }
         }
-        
-        
-        
+
+        resultados.push({
+            nombre: ciudadano.nombre_completo,
+            porcentaje: newCount
+        });
     }
-    console.log(maxSospechoso + " RESPUESTA")
 
-    alert(`EL ciudadano màs sospechoso fue: ${maxSospechoso} Con un % de ${maxCount}`)
+    resultados.sort((a, b) => b.porcentaje - a.porcentaje);
 
+    const cincoPrimeros = resultados.slice(0, 5);
 
-    return maxSospechoso, maxCount
+    let mensaje = "Los cinco ciudadanos más sospechosos son:\n";
+    cincoPrimeros.forEach((resultado, index) => {
+        mensaje += `${index + 1}. ${resultado.nombre} - ${resultado.porcentaje} %\n`;
+    });
+
+    console.log(cincoPrimeros);
+    alert(mensaje);
 }
