@@ -90,7 +90,7 @@ const cargarFormularioProfesores = async () => {
             <input type = "number" id = "celular" required> 
 
             <label for = "adn">ADN Ciudadano: </label>
-            <input type = "number" id = "adn" required> 
+            <input type = "text" id = "adn" required> 
 
             <label for = "id_ciudadano">Id Ciudadano: </label>
             <input type = "text" id = "id_ciudadano" required> 
@@ -99,6 +99,7 @@ const cargarFormularioProfesores = async () => {
 
             <button type = "button" onclick = "mostrarListadoCiudadanos()">Mostrar Ciudadanos</button>
 
+
         </div>
     </div>
     </form>
@@ -106,6 +107,7 @@ const cargarFormularioProfesores = async () => {
 
     const listadoCiudadanos = document.getElementById('listado-ciudadanos');
     listadoCiudadanos.style.display = "none"
+
 
 }
 
@@ -123,6 +125,14 @@ const crearCiudadano = async () => {
     const adn = adnInput.value;
     const idCiudadano = idCiudadanoInput.value;
 
+
+    const ciudadanoAdn = listaCiudadanos.find((ciudadano) => ciudadano.codigo_adn === adn)
+
+    if(ciudadanoAdn){
+        alert('Lo siento, ya hay un adn exactamente igual')
+        return;
+    }
+    
 
     const nuevoCiudadano = {
         nombre_completo: nombre_completo,
